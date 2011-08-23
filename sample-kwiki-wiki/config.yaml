@@ -1,0 +1,6 @@
+# Put all local overrides/modifications to the config/* files in this
+# file. Do not modify any of the files under the config/ directory as
+# they will be overwritten by subsequent upgrades to Kwiki modules.
+# See: http://www.kwiki.org/?ChangingConfigDotYaml
+#
+logo_image: kwiki-onion.jpg

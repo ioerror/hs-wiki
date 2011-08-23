@@ -1,0 +1,82 @@
+To install a Kwiki Wiki as a Tor hidden service, you will need the following
+Debian packages:
+
+  tor
+  tor-geoipdb
+  libkwiki-perl
+  libhtml-wikiconverter-kwiki-perl
+  libkwiki-cache-perl
+  apache2
+
+Optionally, I suggest this package:
+
+  dh-make-perl
+
+To install Kwiki plugins, I suggest that you do not use CPAN directly as
+you'll have a rather unclean root file system. Rather it is much easier to
+use 'dh-make-perl' to create .debs of various Kwiki plugins. Here's an
+example of how you would install a new theme as a proper package:
+
+  dh-make-perl --build --cpan Kwiki::Theme::Klassik
+  sudo dpkg -i libkwiki-theme-klassik-perl_0.12-1_all.deb
+
+I suggest the following plugins:
+
+  dh-make-perl --build --cpan Kwiki::Attachments
+  dh-make-perl --build --cpan Kwiki::RecentChanges
+  dh-make-perl --build --cpan Kwiki::Theme::Klassik
+  dh-make-perl --build --cpan Kwiki::Search
+
+After plugin package creation install the debs:
+
+  sudo dpkg -i libkwiki-attachments-*_all.deb
+  sudo dpkg -i libkwiki-recentchanges-*_all.deb
+  sudo dpkg -i libkwiki-search-*_all.deb
+  sudo dpkg -i libkwiki-theme-klassik-*_all.deb
+
+You'll want to copy the configuration files from the configs directory into
+their respective places. It is likely that this should work perfectly:
+
+  sudo cp configs/hs-wiki-apache2.conf /etc/apache2/sites-available/hs-wiki
+  sudo cp configs/ports-apache2.conf /etc/apache2/ports.conf
+  sudo cp configs/torrc /etc/tor/torrc
+
+Now you have a choice - your wiki is expected to be in /var/www/hs-wiki/ so
+you may install it by using the sample wiki included in this repo like so:
+
+  sudo cp -arv sample-kwiki-wiki /var/www/hs-wiki
+  sudo chown -R root:root /var/www/hs-wiki
+  sudo chown -R root:www-data /var/www/hs-wiki/database
+  sudo chown -R root:www-data /var/www/hs-wiki/plugin
+  sudo chmod -R 775 /var/www/hs-wiki/database
+  sudo chmod -R 775 /var/www/hs-wiki/plugin
+
+Otherwise, you'll want to create a new wiki like so:
+
+  kwiki -new hs-wiki
+  sudo cp -arv hs-wiki /var/www/hs-wiki
+  sudo chown -R root:root /var/www/hs-wiki
+  sudo chown -R root:www-data /var/www/hs-wiki/database
+  sudo chown -R root:www-data /var/www/hs-wiki/plugin
+  sudo chmod -R 775 /var/www/hs-wiki/database
+  sudo chmod -R 775 /var/www/hs-wiki/plugin
+
+If you opt to create your own wiki, you'll need to configure it yourself.
+In either case it will be quite minimal but it should be safe and easy to
+use.
+
+To make these configuration changes useful and get started with your new Kwiki, you'll want to tell each program to be aware of the changes:
+
+  sudo /etc/init.d/tor reload
+  sudo a2ensite hs-wiki
+  sudo /etc/init.d/apache2 reload
+
+You may want to configure ServerName in the hs-wiki but it is not required.
+
+To add plugins you'll want to edit /var/www/hs-wiki/plugins and then run
+Kwiki to update it:
+
+  cd /var/www/hs-wiki
+  # edit your /var/www/hs-wiki/plugins to enable some plugin(s)
+  kwiki -update
+

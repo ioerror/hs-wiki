@@ -1,0 +1,3 @@
+This is a small project to encourage people to run their own Hidden Service
+wikis.  It assumes that you use Debian Squeeze or better and that you're root
+on the computer where you wish to run the Kwiki wiki.

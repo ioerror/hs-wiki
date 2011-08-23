@@ -1,0 +1,172 @@
+{
+  'action' => {
+    'display' => [
+      'display'
+    ],
+    'edit' => [
+      'edit'
+    ],
+    'edit_contention' => [
+      'edit'
+    ]
+  },
+  'add_order' => {
+    'display' => {
+      'action' => [
+        'display'
+      ],
+      'preference' => [
+        'display_changed_by'
+      ],
+      'toolbar' => [
+        'home_button'
+      ]
+    },
+    'edit' => {
+      'action' => [
+        'edit',
+        'edit_contention'
+      ],
+      'toolbar' => [
+        'edit_button'
+      ]
+    },
+    'status' => {
+      'preload' => [
+        'status'
+      ]
+    },
+    'theme' => {
+      'preload' => [
+        'theme'
+      ],
+      'prerequisite' => [
+        'toolbar',
+        'widgets',
+        'status'
+      ]
+    },
+    'toolbar' => {
+      'preload' => [
+        'toolbar'
+      ]
+    },
+    'widgets' => {
+      'preload' => [
+        'widgets'
+      ]
+    }
+  },
+  'classes' => {
+    'cgi' => 'Kwiki::CGI',
+    'command' => 'Kwiki::Command',
+    'config' => 'Kwiki::Config',
+    'cookie' => 'Kwiki::Cookie',
+    'css' => 'Kwiki::CSS',
+    'display' => 'Kwiki::Display',
+    'edit' => 'Kwiki::Edit',
+    'files' => 'Kwiki::Files',
+    'formatter' => 'Kwiki::Formatter',
+    'headers' => 'Spoon::Headers',
+    'hooks' => 'Spoon::Hooks',
+    'hub' => 'Kwiki::Hub',
+    'javascript' => 'Kwiki::Javascript',
+    'page' => 'Kwiki::Page',
+    'page_metadata' => 'Kwiki::PageMeta',
+    'pages' => 'Kwiki::Pages',
+    'preferences' => 'Kwiki::Preferences',
+    'registry' => 'Kwiki::Registry',
+    'status' => 'Kwiki::Status',
+    'template' => 'Kwiki::Template::TT2',
+    'theme' => 'Kwiki::Theme::Basic',
+    'toolbar' => 'Kwiki::Toolbar',
+    'users' => 'Kwiki::Users',
+    'widgets' => 'Kwiki::Widgets'
+  },
+  'plugins' => [
+    {
+      'id' => 'display',
+      'title' => 'Page Display'
+    },
+    {
+      'id' => 'edit',
+      'title' => 'Page Edit'
+    },
+    {
+      'id' => 'theme',
+      'title' => 'Basic Theme'
+    },
+    {
+      'id' => 'toolbar',
+      'title' => 'Kwiki Toolbar'
+    },
+    {
+      'id' => 'status',
+      'title' => 'Kwiki Status'
+    },
+    {
+      'id' => 'widgets',
+      'title' => 'Kwiki Widgets'
+    }
+  ],
+  'preference' => {
+    'display_changed_by' => [
+      'display',
+      'object',
+      bless( {
+        'default' => 0,
+        'handler' => 'display_changed_by_handler',
+        'id' => 'display_changed_by',
+        'name' => 'Display Changed By',
+        'owner_id' => 'display',
+        'query' => 'Show a "Changed by ..." section on each page?',
+        'type' => 'boolean'
+      }, 'Kwiki::Preference' )
+    ]
+  },
+  'preload' => {
+    'status' => [
+      'status'
+    ],
+    'theme' => [
+      'theme',
+      'priority',
+      1
+    ],
+    'toolbar' => [
+      'toolbar'
+    ],
+    'widgets' => [
+      'widgets'
+    ]
+  },
+  'prerequisite' => {
+    'status' => [
+      'theme'
+    ],
+    'toolbar' => [
+      'theme'
+    ],
+    'widgets' => [
+      'theme'
+    ]
+  },
+  'toolbar' => {
+    'edit_button' => [
+      'edit',
+      'template',
+      'edit_button.html',
+      'show_for',
+      [
+        'display',
+        'revisions',
+        'edit_contention'
+      ]
+    ],
+    'home_button' => [
+      'display',
+      'template',
+      'home_button.html'
+    ]
+  }
+}

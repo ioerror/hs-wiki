@@ -1,0 +1,14 @@
+#
+# This is a very minimal Tor configuration file to be placed in
+# /etc/tor/torrc unless you know better.
+#
+# This configuration file should be used with a Kwiki wiki Hidden Service on
+# 127.0.0.1:8080
+#
+
+Log notice file /var/log/tor/hswiki-notice.log
+DataDirectory /var/lib/tor
+
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:8080
+

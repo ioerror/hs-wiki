@@ -1,0 +1,14 @@
+=== Welcome to Your New Tor Hidden Service Kwiki!
+
+You have successfully installed a new Kwikii as a [Tor Hidden Service https://www.torproject.org/docs/hidden-services.html] and you are hopefully accessing this page through the [Tor network https://www.torproject.org/about/overview.html]. Now you should /edit this page/ and start adding NewPages. For help on Kwiki syntax and other Kwiki issues, visit http://www.kwiki.org/?KwikiHelpIndex.
+
+If this installation looks more mundane than you had expected after visiting Kwiki sites like http://www.kwiki.org, you need to install some *Kwiki plugins*. Some of the basic plugins you might want are:
+
+* Kwiki::!RecentChanges
+* Kwiki::Search
+* Kwiki::!UserPreferences
+* Kwiki::!UserName
+* Kwiki::Archive::Rcs
+* Kwiki::Revisions
+
+These plugin modules are available on [CPAN http://search.cpan.org/search?query=kwiki&mode=dist]. Visit http://www.kwiki.org/?KwikiPluginInstallation to learn more about installing plugins.
